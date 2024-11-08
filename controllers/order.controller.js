@@ -3,8 +3,8 @@ const Client = require("../models/Client");
 
 class OrderController {
     async createOrder (req, res)  {
-        const { clientId } = req.params;
-        const { issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina,trackCode   } = req.body;
+        const { clientId } = req.user;
+        const { issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina, trackCode  } = req.body;
       
         try {
           // Находим клиента по clientId
@@ -36,8 +36,8 @@ class OrderController {
       }
 
       async deleteOrder(req, res)  {
-        const { clientId, trackCode } = req.params;
-      
+        const { clientId } = req.user;
+        const { trackCode } = req.params;
         try {
           // Находим клиента
           const client = await Client.findOne({ clientId });
@@ -58,8 +58,9 @@ class OrderController {
       }
 
       async editOrder(req, res) {
-        const { clientId, trackCode } = req.params;
-        const { code, issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliverTo } = req.body;
+        const { clientId } = req.user;
+        const { trackCode } = req.params;
+        const { issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina  } = req.body;
       
         try {
           const client = await Client.findOne({ clientId });
@@ -69,14 +70,14 @@ class OrderController {
           }
       
           // Ищем заказ по коду
-          const orderIndex = client.orders.findIndex(order => order.code === parseInt(trackCode));
+          const orderIndex = client.orders.findIndex(order => order.trackCode === trackCode);
       
           if (orderIndex === -1) {
             return res.status(404).send('Order not found');
           }
       
           // Обновляем данные заказа
-          client.orders[orderIndex] = { code, issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliverTo };
+          client.orders[orderIndex] = {trackCode, issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina };
       
           await client.save();
           res.status(200).json(client);
@@ -87,7 +88,8 @@ class OrderController {
       }
 
       async searchOrders(req, res) {
-        const { clientId, trackCode } = req.params;
+        const { clientId } = req.user;
+        const { trackCode } = req.params;
       
         try {
           const client = await Client.findOne({ clientId });
@@ -96,7 +98,7 @@ class OrderController {
             return res.status(404).send('Client not found');
           }
       
-          const order = client.orders.find(order => order.code === parseInt(trackCode));
+          const order = client.orders.find(order => order.trackCode === trackCode);
       
           if (!order) {
             return res.status(404).send('Order not found');
@@ -110,7 +112,7 @@ class OrderController {
       }
 
       async ordersHistory(req, res) {
-        const { clientId } = req.params;
+        const { clientId } = req.user;
       
         try {
           const client = await Client.findOne({ clientId });
