@@ -15,5 +15,6 @@ router.get("/search/:trackCode", authMiddleware, orderController.searchOrders);
 // 6. История заказов клиента
 router.get("/history", authMiddleware, orderController.ordersHistory);
 router.get("/allOrders", authMiddleware, orderController.getAllOrders);
+router.get("/allClients", authMiddleware, orderController.getAllClients);
 
 module.exports = router;

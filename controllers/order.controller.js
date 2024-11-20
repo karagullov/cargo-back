@@ -132,13 +132,25 @@ class OrderController {
         try {
           // Fetch all clients from the database
           const clients = await Client.find();
-    console.log(111,clients);
+    // console.log(111,clients);
     
           // Extract all orders from each client and flatten the array
           const allOrders = clients.flatMap(client => client.orders);
     
           // Return the combined orders
           res.status(200).json(allOrders);
+        } catch (err) {
+          console.error(err);
+          res.status(500).send('Server error');
+        }
+      }
+
+      async getAllClients(req, res) {
+        try {
+          // Fetch all clients from the database
+          const clients = await Client.find();
+          // Return the combined orders
+          res.status(200).json(clients);
         } catch (err) {
           console.error(err);
           res.status(500).send('Server error');
