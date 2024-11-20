@@ -4,7 +4,7 @@ const orderController = require("../controllers/order.controller");
 
 const router = new Router();
 
-// 2. Добавить заказ
+// 2. Добавить зака
 router.post("/create", authMiddleware, orderController.createOrder);
 // 3. Удалить заказ
 router.delete("/delete/:trackCode", authMiddleware, orderController.deleteOrder);
@@ -14,5 +14,6 @@ router.put("/edit/:trackCode", authMiddleware, orderController.editOrder);
 router.get("/search/:trackCode", authMiddleware, orderController.searchOrders);
 // 6. История заказов клиента
 router.get("/history", authMiddleware, orderController.ordersHistory);
+router.get("/allOrders", authMiddleware, orderController.getAllOrders);
 
 module.exports = router;
