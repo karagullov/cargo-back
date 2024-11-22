@@ -6,6 +6,7 @@ const clientSchema = new mongoose.Schema({
   clientId: { type: String, required: true, unique: true },
   phone: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  city: { type: String, required: true },
   orders: [orderSchema], // Здесь мы используем схему заказа как поддокумент
 });
 

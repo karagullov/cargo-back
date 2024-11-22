@@ -7,7 +7,7 @@ const router = new Router();
 router.post(
   "/create-client",
   async (req, res) => {
-    const { clientId, phone } = req.body;
+    const { clientId, phone, city } = req.body;
 
   try {
     // Проверяем, существует ли уже клиент с таким clientId
@@ -20,6 +20,7 @@ router.post(
     const newClient = new Client({
       clientId,
       phone,
+      city,
       orders: []
     });
 

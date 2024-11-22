@@ -58,9 +58,9 @@ class OrderController {
       }
 
       async editOrder(req, res) {
-        const { clientId } = req.user;
+        // const { clientId } = req.user;
         const { trackCode } = req.params;
-        const { issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina  } = req.body;
+        const { issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina,clientId  } = req.body;
       
         try {
           const client = await Client.findOne({ clientId });
