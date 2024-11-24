@@ -21,7 +21,7 @@ router.post(
         return res.status(400).json({ message: "Uncorrect request", errors });
       }
 
-      const { phone, password, clientId } = req.body;
+      const { phone, password, clientId ,city} = req.body;
       const candidate = await Client.findOne({ clientId });
 
       if (candidate) {
@@ -30,7 +30,7 @@ router.post(
           .json({ message: `Client with client Id ${clientId} already exists` });
       }
       const hashPassword = await bcrypt.hash(password, 5);
-      const user = new Client({ phone, password: hashPassword, clientId });
+      const user = new Client({ phone, password: hashPassword, clientId, city });
       await user.save();
       // await fileService.createDir(req, new File({ user: user.id, name: "" }));
       return res.json({ message: "Client was created" });
