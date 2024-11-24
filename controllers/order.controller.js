@@ -36,8 +36,8 @@ class OrderController {
       }
 
       async deleteOrder(req, res)  {
-        const { clientId } = req.user;
-        const { trackCode } = req.params;
+        // const { clientId } = req.user;
+        const { trackCode, clientId } = req.params;
         try {
           // Находим клиента
           const client = await Client.findOne({ clientId });

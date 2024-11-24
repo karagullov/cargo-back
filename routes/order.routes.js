@@ -7,9 +7,9 @@ const router = new Router();
 // 2. Добавить зака
 router.post("/create", authMiddleware, orderController.createOrder);
 // 3. Удалить заказ
-router.delete("/delete/:trackCode", authMiddleware, orderController.deleteOrder);
+router.delete("/delete/:trackCode/:clientId", orderController.deleteOrder);
 // 4. Изменить заказ
-router.put("/edit/:trackCode", authMiddleware, orderController.editOrder);
+router.put("/edit/:trackCode", orderController.editOrder);
 // 5. Поиск заказа по коду
 router.get("/search/:trackCode", authMiddleware, orderController.searchOrders);
 // 6. История заказов клиента
@@ -18,3 +18,5 @@ router.get("/allOrders", authMiddleware, orderController.getAllOrders);
 router.get("/allClients", authMiddleware, orderController.getAllClients);
 
 module.exports = router;
+
+
