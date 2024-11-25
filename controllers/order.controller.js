@@ -20,7 +20,7 @@ class OrderController {
       }
       
           // Создаем новый заказ
-          const newOrder = {issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina,trackCode };
+          const newOrder = {issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina,trackCode,clientId };
       
           // Добавляем заказ в массив заказов клиента
           client.orders.push(newOrder);

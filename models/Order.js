@@ -13,6 +13,7 @@ const orderSchema = new mongoose.Schema({
   deliverTo: { type: String, required: true },
   receiventInChina:{ type: Number, required: true },
   trackCode:{ type: String, required: true }, 
+  clientId:{ type: String, required: true }, 
 });
 
 module.exports = orderSchema; // Мы экспортируем только схему, а не модель
