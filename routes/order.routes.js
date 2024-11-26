@@ -5,7 +5,7 @@ const orderController = require("../controllers/order.controller");
 const router = new Router();
 
 // 2. Добавить зака
-router.post("/create", authMiddleware, orderController.createOrder);
+router.post("/create", orderController.createOrder);
 // 3. Удалить заказ
 router.delete("/delete/:trackCode/:clientId", orderController.deleteOrder);
 // 4. Изменить заказ

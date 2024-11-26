@@ -3,8 +3,8 @@ const Client = require("../models/Client");
 
 class OrderController {
     async createOrder (req, res)  {
-        const { clientId } = req.user;
-        const { issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina, trackCode  } = req.body;
+        // const { clientId } = req.user;
+        const { issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina, trackCode, clientId  } = req.body;
       
         try {
           // Находим клиента по clientId
