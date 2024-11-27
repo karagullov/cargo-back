@@ -77,7 +77,7 @@ class OrderController {
           }
       
           // Обновляем данные заказа
-          client.orders[orderIndex] = {trackCode, issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina };
+          client.orders[orderIndex] = {trackCode, issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina,clientId };
       
           await client.save();
           res.status(200).json(client);
