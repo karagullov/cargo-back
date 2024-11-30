@@ -16,6 +16,9 @@ router.get("/search/:trackCode", authMiddleware, orderController.searchOrders);
 router.get("/history", authMiddleware, orderController.ordersHistory);
 router.get("/allOrders", orderController.getAllOrders);
 router.get("/allClients", orderController.getAllClients);
+router.put("/set-price", orderController.setPrice);
+router.get("/get-price", orderController.getPrice);
+
 
 module.exports = router;
 

@@ -1,4 +1,5 @@
 const Client = require("../models/Client");
+const Price = require("../models/Price");
 
 
 class OrderController {
@@ -157,7 +158,48 @@ class OrderController {
         }
       }
 
+      async setPrice(req, res) {
+        try {
+        const { price } = req.body;
+          // Fetch all clients from the database
+          let oldPrice = await Price.findOne(); 
+          console.log(111,oldPrice);
+
+          if (!oldPrice) {
+      // Если запись отсутствует, создаём новую
+      oldPrice = new Price({ price });
+    } else {
+      // Обновляем существующую запись
+      oldPrice.price = price;
+    }
+          
+         // Сохраняем изменения
+    await oldPrice.save();
+          // Return the combined orders
+          res.status(200).json(oldPrice);
+        } catch (err) {
+          console.error(err);
+          res.status(500).send('Server error');
+        }
+      }
+
+      async getPrice(req, res) {
+        try {
+        const { price } = req.body;
+          // Fetch all clients from the database
+          let oldPrice = await Price.findOne(); 
+
+          // Return the combined orders
+          res.status(200).json(oldPrice);
+        } catch (err) {
+          console.error(err);
+          res.status(500).send('Server error');
+        }
+      }
+
     
 }
 
 module.exports = new OrderController();
+
+
