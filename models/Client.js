@@ -8,6 +8,10 @@ const clientSchema = new mongoose.Schema({
   password: { type: String, required: true },
   city: { type: String, required: true },
   name: { type: String, required: true },
+  price: { type: Number, required: false },
+  weight: { type: Number, required: false },
+  amount: { type: Number, required: false },
+  // trackCodes: {type: Array, required: false},
   orders: [orderSchema], // Здесь мы используем схему заказа как поддокумент
 });
 

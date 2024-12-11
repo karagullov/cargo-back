@@ -18,6 +18,7 @@ router.get("/allOrders", orderController.getAllOrders);
 router.get("/allClients", orderController.getAllClients);
 router.put("/set-price", orderController.setPrice);
 router.get("/get-price", orderController.getPrice);
+router.put("/import", orderController.importFile);
 
 
 module.exports = router;

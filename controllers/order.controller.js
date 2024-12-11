@@ -5,7 +5,7 @@ const Price = require("../models/Price");
 class OrderController {
     async createOrder (req, res)  {
         // const { clientId } = req.user;
-        const { issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina, trackCode, clientId  } = req.body;
+        const { issued, name, createdDate, paid, dateOfPayment, deliveredDate,deliverTo,receiventInChina, trackCode, clientId  } = req.body;
       
         try {
           // Находим клиента по clientId
@@ -19,9 +19,10 @@ class OrderController {
       if(orderExist){
         return res.status(404).send(`Order with trackCode ${trackCode} already exists`);
       }
+      console.log(111,client.name);
       
           // Создаем новый заказ
-          const newOrder = {issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina,trackCode,clientId };
+          const newOrder = {issued, name, createdDate, paid, dateOfPayment, deliveredDate,deliverTo,receiventInChina,trackCode,clientId,clientName:client.name };
       
           // Добавляем заказ в массив заказов клиента
           client.orders.push(newOrder);
@@ -61,7 +62,7 @@ class OrderController {
       async editOrder(req, res) {
         // const { clientId } = req.user;
         const { trackCode } = req.params;
-        const { issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina,clientId  } = req.body;
+        const { issued, name, createdDate, paid, dateOfPayment, deliveredDate,deliverTo,receiventInChina,clientId ,clientName } = req.body;
       
         try {
           const client = await Client.findOne({ clientId });
@@ -78,7 +79,7 @@ class OrderController {
           }
       
           // Обновляем данные заказа
-          client.orders[orderIndex] = {trackCode, issued, price, name, createdDate, paid, weight, amount, dateOfPayment, deliveredDate,deliverTo,receiventInChina,clientId };
+          client.orders[orderIndex] = {trackCode, issued, name, createdDate, paid, dateOfPayment, deliveredDate,deliverTo,receiventInChina,clientId ,clientName};
       
           await client.save();
           res.status(200).json(client);
@@ -191,6 +192,43 @@ class OrderController {
 
           // Return the combined orders
           res.status(200).json(oldPrice);
+        } catch (err) {
+          console.error(err);
+          res.status(500).send('Server error');
+        }
+      }
+
+
+      async importFile(req, res){
+         try {
+        const { file } = req.body;
+// const results = []; 
+console.log(222,file);
+
+
+        file.forEach(async(item) => {
+           const { clientId, trackCodes, price, weight } = item;
+
+           const client = await Client.findOne({ clientId });
+
+           if(!client)return
+
+
+        //  const newOrders =   client.orders.map((order)=>{
+        //     if(trackCodes.find(order.trackCode)){
+        //       return {...order, }
+        //     }
+        //    })
+
+        client.price = price
+        client.weight = weight
+        client.amount = trackCodes.length
+        client.save()
+
+
+        });
+       
+          res.status(200).json('Success');
         } catch (err) {
           console.error(err);
           res.status(500).send('Server error');
