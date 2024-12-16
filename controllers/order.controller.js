@@ -198,6 +198,28 @@ class OrderController {
         }
       }
 
+      async editClient(req,res){
+        const { clientId ,price,weight,amount} = req.body;
+
+          const client = await Client.findOne({ clientId });
+
+          if (!client) {
+            return res.status(404).send('Client not found');
+          }
+
+
+        //  const newOrders =   client.orders.map((order)=>{
+        //     if(trackCodes.find(order.trackCode)){
+        //       return {...order, }
+        //     }
+        //    })
+
+        client.price = price
+        client.weight = weight
+        client.amount = amount
+        client.save()
+      }
+
 
       async importFile(req, res){
          try {
