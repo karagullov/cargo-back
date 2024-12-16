@@ -59,6 +59,27 @@ class OrderController {
         }
       }
 
+       async deleteOrders(req, res)  {
+        const { clientId } = req.params;
+        try {
+          // Находим клиента
+          const client = await Client.findOne({ clientId });
+      
+          if (!client) {
+            return res.status(404).send('Client not found');
+          }
+      
+          // Удаляем заказ по коду
+          client.orders = []
+      
+          await client.save();
+          res.status(200).json(client);
+        } catch (err) {
+          console.error(err);
+          res.status(500).send('Server error');
+        }
+      }
+
       async editOrder(req, res) {
         // const { clientId } = req.user;
         const { trackCode } = req.params;

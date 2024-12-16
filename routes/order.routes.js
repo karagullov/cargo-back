@@ -8,6 +8,7 @@ const router = new Router();
 router.post("/create", orderController.createOrder);
 // 3. Удалить заказ
 router.delete("/delete/:trackCode/:clientId", orderController.deleteOrder);
+router.delete("/delete-orders/:clientId", orderController.deleteOrders);
 // 4. Изменить заказ
 router.put("/edit/:trackCode", orderController.editOrder);
 // 5. Поиск заказа по коду
