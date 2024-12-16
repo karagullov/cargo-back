@@ -72,6 +72,9 @@ class OrderController {
           // Удаляем заказ по коду
           client.orders = []
           client.paid = false
+          client.amount = 0
+          client.weight = 0
+          client.price = 0
       
           await client.save();
           res.status(200).json(client);
