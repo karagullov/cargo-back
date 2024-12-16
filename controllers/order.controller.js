@@ -113,6 +113,23 @@ class OrderController {
         }
       }
 
+        async getClient(req, res) {
+        const { clientId } = req.user;
+      
+        try {
+          const client = await Client.findOne({ clientId });
+      
+          if (!client) {
+            return res.status(404).send('Client not found');
+          }
+      
+          res.status(200).json(client);
+        } catch (err) {
+          console.error(err);
+          res.status(500).send('Server error');
+        }
+      }
+
       async ordersHistory(req, res) {
         const { clientId } = req.user;
       
