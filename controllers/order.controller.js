@@ -237,7 +237,7 @@ class OrderController {
       }
 
       async editClient(req,res){
-        const { clientId ,price,weight,amount, paid} = req.body;
+        const { clientId ,price,weight,amount, paid,dateOfPayment} = req.body;
 
           const client = await Client.findOne({ clientId });
 
@@ -255,7 +255,11 @@ class OrderController {
         client.price = price
         client.weight = weight
         client.amount = amount
-        client.paid = !!paid
+        if(dateOfPayment){
+  client.paid = !!paid
+        client.dateOfPayment=dateOfPayment
+        }
+      
         client.save()
           res.status(200).json('Success');
 

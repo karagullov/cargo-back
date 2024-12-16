@@ -12,7 +12,7 @@ const clientSchema = new mongoose.Schema({
   weight: { type: Number, required: false },
   amount: { type: Number, required: false },
   paid: { type: Boolean, required: false },
-  // dateOfPayment: { type: Number, required: true },
+  dateOfPayment: { type: Number, required: false },
   deliveredDate: { type: Number, required: false },
   // deliverTo: { type: String, required: true },
   receiventInChina:{ type: Number, required: false },
