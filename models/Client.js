@@ -11,6 +11,7 @@ const clientSchema = new mongoose.Schema({
   price: { type: Number, required: false },
   weight: { type: Number, required: false },
   amount: { type: Number, required: false },
+  paid: { type: Boolean, required: false },
   // trackCodes: {type: Array, required: false},
   orders: [orderSchema], // Здесь мы используем схему заказа как поддокумент
 });

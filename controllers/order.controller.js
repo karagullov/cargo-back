@@ -140,7 +140,7 @@ class OrderController {
           const allOrders = clients.flatMap(client => client.orders);
     
           // Return the combined orders
-          res.status(200).json(allOrders);
+          res.status(200).json(clients);
         } catch (err) {
           console.error(err);
           res.status(500).send('Server error');
@@ -199,7 +199,7 @@ class OrderController {
       }
 
       async editClient(req,res){
-        const { clientId ,price,weight,amount} = req.body;
+        const { clientId ,price,weight,amount, paid} = req.body;
 
           const client = await Client.findOne({ clientId });
 
@@ -217,8 +217,13 @@ class OrderController {
         client.price = price
         client.weight = weight
         client.amount = amount
+        client.paid = !!paid
         client.save()
+          res.status(200).json('Success');
+
       }
+
+
 
 
       async importFile(req, res){
