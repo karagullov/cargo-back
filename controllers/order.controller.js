@@ -5,7 +5,7 @@ const Price = require("../models/Price");
 class OrderController {
     async createOrder (req, res)  {
         // const { clientId } = req.user;
-        const { issued, name, createdDate, paid, dateOfPayment, deliveredDate,deliverTo,receiventInChina, trackCode, clientId  } = req.body;
+        const { issued, name, createdDate, paid, trackCode, clientId  } = req.body;
       
         try {
           // Находим клиента по clientId
@@ -22,7 +22,7 @@ class OrderController {
       console.log(111,client.name);
       
           // Создаем новый заказ
-          const newOrder = {issued, name, createdDate, paid, dateOfPayment, deliveredDate,deliverTo,receiventInChina,trackCode,clientId,clientName:client.name };
+          const newOrder = {issued, name, createdDate, paid,trackCode,clientId,clientName:client.name };
       
           // Добавляем заказ в массив заказов клиента
           client.orders.push(newOrder);
@@ -62,7 +62,7 @@ class OrderController {
       async editOrder(req, res) {
         // const { clientId } = req.user;
         const { trackCode } = req.params;
-        const { issued, name, createdDate, paid, dateOfPayment, deliveredDate,deliverTo,receiventInChina,clientId ,clientName } = req.body;
+        const { issued, name, createdDate, paid,clientId ,clientName } = req.body;
       
         try {
           const client = await Client.findOne({ clientId });
@@ -79,7 +79,7 @@ class OrderController {
           }
       
           // Обновляем данные заказа
-          client.orders[orderIndex] = {trackCode, issued, name, createdDate, paid, dateOfPayment, deliveredDate,deliverTo,receiventInChina,clientId ,clientName};
+          client.orders[orderIndex] = {trackCode, issued, name, createdDate, paid,clientId ,clientName};
       
           await client.save();
           res.status(200).json(client);
@@ -246,7 +246,7 @@ console.log(222,file);
         //       return {...order, }
         //     }
         //    })
-
+client.deliveredDate = Date.now()
         client.price = price
         client.weight = weight
         client.amount = trackCodes.length
