@@ -19,6 +19,7 @@ router.get("/allClients", orderController.getAllClients);
 router.put("/set-price", orderController.setPrice);
 router.get("/get-price", orderController.getPrice);
 router.put("/import", orderController.importFile);
+router.put("/edit-client", orderController.editClient);
 
 
 module.exports = router;
