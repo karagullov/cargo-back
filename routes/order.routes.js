@@ -12,7 +12,7 @@ router.delete("/delete/:trackCode/:clientId", orderController.deleteOrder);
 router.put("/edit/:trackCode", orderController.editOrder);
 // 5. Поиск заказа по коду
 router.get("/search/:trackCode", authMiddleware, orderController.searchOrders);
-router.get("/client/:clientId", authMiddleware, orderController.searchOrders);
+router.get("/client/:clientId", authMiddleware, orderController.getClient);
 // 6. История заказов клиента
 router.get("/history", authMiddleware, orderController.ordersHistory);
 router.get("/allOrders", orderController.getAllOrders);
