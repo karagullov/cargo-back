@@ -299,6 +299,10 @@ client.deliveredDate = Date.now()
         client.save()
 
 
+
+        client.imports.push({amount:trackCodes.length, price,weight,clientId,timestamp,paid:false})
+
+
         });
        
           res.status(200).json('Success');

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const orderSchema = require('./Order'); // Импортируем схему заказа
+const importSchema = require('./Import'); // Импортируем схему заказа
 
 // Схема для клиента
 const clientSchema = new mongoose.Schema({
@@ -18,7 +19,10 @@ const clientSchema = new mongoose.Schema({
   receiventInChina:{ type: Number, required: false },
   // trackCodes: {type: Array, required: false},
   orders: [orderSchema], // Здесь мы используем схему заказа как поддокумент
+  imports:[importSchema]
 });
 
 const Client = mongoose.model('Client', clientSchema); // Модель для клиента
 module.exports = Client;
+
+ 

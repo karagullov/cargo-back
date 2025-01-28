@@ -4,7 +4,7 @@ const orderSchema = new mongoose.Schema({
   issued: { type: Boolean, required: true },
   // price: { type: Number, required: true },
   // weight: { type: Number, required: true },
-  name: { type: String, required: true },
+  name: { type: String, required: false },
   createdDate: { type: Number, required: true },
   paid: { type: Boolean, required: true },
   // amount: { type: Number, required: true },
@@ -14,7 +14,7 @@ const orderSchema = new mongoose.Schema({
   // receiventInChina:{ type: Number, required: true },
   trackCode:{ type: String, required: true }, 
   clientId:{ type: String, required: true }, 
-  clientName:{type: String, required: true}
+  clientName:{type: String, required: false}
 });
 
 module.exports = orderSchema; // Мы экспортируем только схему, а не модель
