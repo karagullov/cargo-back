@@ -280,7 +280,7 @@ console.log(222,file);
 
 
         file.forEach(async(item) => {
-           const { clientId, trackCodes, price, weight } = item;
+           const { clientId, trackCodes, price, weight ,timestamp} = item;
 
            const client = await Client.findOne({ clientId });
 
