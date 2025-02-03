@@ -241,7 +241,7 @@ class OrderController {
       }
 
       async editClient(req,res){
-        const { clientId ,price,weight,amount, paid,dateOfPayment} = req.body;
+        const { clientId ,price,weight,amount, paid,dateOfPayment,imports } = req.body;
 
           const client = await Client.findOne({ clientId });
 
@@ -259,6 +259,7 @@ class OrderController {
         client.price = price
         client.weight = weight
         client.amount = amount
+        client.imports = imports
         if(dateOfPayment){
   client.paid = !!paid
         client.dateOfPayment=dateOfPayment
